@@ -1,8 +1,8 @@
 # Spanish Numbers 
 ## Demo
-<!-- <p align="center">
-  <img src="./t_demo.gif">
-</p> -->
+<p align="center">
+  <img src="./sn_demo.gif">
+</p>
 
 ## Summary
 Learning react-native to implement audio playback in app. App will count in numbers in Spanish.
