@@ -86,8 +86,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   gridContainer: {
     flex: 1,
@@ -96,6 +94,8 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: "center",
     marginTop: 25,
+    height: 100,
+    width: 100,
   },
   rowContainer: {
     flexDirection: "row"
