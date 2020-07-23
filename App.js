@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 import { Audio } from 'expo-av';
 
 
@@ -32,30 +31,23 @@ const soundList = {
 };
 
 export default function App() {
-
-  //[ x ] TODO: method to play sound
-  playSound = number => {
-    //creating object 
+  playSound = async number => {
     const soundObject = new Audio.Sound();
     try {
-      let path = soundList[number]
-      await soundObject.loadAsync(path)
+      let path = soundList[number];
+      await soundObject.loadAsync(path);
       await soundObject
         .playAsync()
-        //after sound is played, then we want to get a playback status.
-        //giving us a playbackStatus
-        //playbackDuration is how much is played back
         .then(async playbackStatus => {
           setTimeout(() => {
-            //once played it is unloaded
             soundObject.unloadAsync();
           }, playbackStatus.playableDurationMillis);
         })
         .catch(error => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -63,9 +55,30 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Spanish Number App</Text>
-      <StatusBar style="auto" />
-    </View>
+      <View style={styles.gridContainer}>
+        <Image
+          style={styles.logo}
+          source={require('./assets/logo.png')}
+        />
+        <View style={styles.rowContainer} >
+          <TouchableOpacity
+            style={[
+              {
+                backgroundColor: listBackgroundColors[1]
+              },
+              styles.item
+            ]}
+            onPress={() => {
+              this.playSound("one")
+            }}
+          >
+            <Text style={styles.itemText}>One
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+      </View>
+    </View >
   );
 }
 
@@ -76,4 +89,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  gridContainer: {
+    flex: 1,
+    margin: 5
+  },
+  logo: {
+    alignSelf: "center",
+    marginTop: 25,
+  },
+  rowContainer: {
+    flexDirection: "row"
+  },
+  item: {
+    flex: 1,
+    height: 110,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 2,
+  },
+  itemText: {
+    color: "white",
+    fontSize: 20,
+  }
 });
