@@ -32,7 +32,35 @@ const soundList = {
 };
 
 export default function App() {
-  //TODO: function to play sound
+
+  //[ x ] TODO: method to play sound
+  playSound = number => {
+    //creating object 
+    const soundObject = new Audio.Sound();
+    try {
+      let path = soundList[number]
+      await soundObject.loadAsync(path)
+      await soundObject
+        .playAsync()
+        //after sound is played, then we want to get a playback status.
+        //giving us a playbackStatus
+        //playbackDuration is how much is played back
+        .then(async playbackStatus => {
+          setTimeout(() => {
+            //once played it is unloaded
+            soundObject.unloadAsync();
+          }, playbackStatus.playableDurationMillis);
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+
+
   return (
     <View style={styles.container}>
       <Text>Spanish Number App</Text>
